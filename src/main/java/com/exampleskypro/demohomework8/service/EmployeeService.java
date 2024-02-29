@@ -5,6 +5,7 @@ import com.exampleskypro.demohomework8.exception.EmployeeStorageIsFullException;
 import com.exampleskypro.demohomework8.model.Employee;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,8 +15,8 @@ public class EmployeeService {
     private final Map<String, Employee> employees = new TreeMap<>();
     private static final int MAX_WORKERS = 100;
 
-    public void addWorker(String firstName, String lastName,Double salary,int department) {
-        Employee addWorker = new Employee(firstName, lastName,salary,department);
+    public void addWorker(String firstName, String lastName, Double salary, int department) {
+        Employee addWorker = new Employee(firstName, lastName, salary, department);
         if (employees.size() > MAX_WORKERS) {
             throw new EmployeeStorageIsFullException();
         }
@@ -25,8 +26,8 @@ public class EmployeeService {
         employees.put(addWorker.toString(), addWorker);
     }
 
-    public void deleteWorker(String firstName, String lastName,Double salary,int department) {
-        Employee delWorker = new Employee(firstName, lastName,salary,department);
+    public void deleteWorker(String firstName, String lastName, Double salary, int department) {
+        Employee delWorker = new Employee(firstName, lastName, salary, department);
         if (employees.containsKey(delWorker.toString())) {
             employees.remove(delWorker.toString());
         } else {
@@ -35,8 +36,8 @@ public class EmployeeService {
 
     }
 
-    public Employee findWorker(String firstName, String lastName,Double salary,int department) {
-        Employee findWorker = new Employee(firstName, lastName,salary,department);
+    public Employee findWorker(String firstName, String lastName, Double salary, int department) {
+        Employee findWorker = new Employee(firstName, lastName, salary, department);
         if (employees.containsKey(findWorker.toString())) {
             return employees.get(findWorker.toString());
         } else {
@@ -47,8 +48,6 @@ public class EmployeeService {
     }
 
     public List<Employee> allWorkers() {
-        return (List<Employee>) employees.values();
+        return new ArrayList<>(employees.values());
     }
-
-
 }
