@@ -17,23 +17,22 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping(path = "/find")
-    public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        return employeeService.findWorker(firstName, lastName);
-    }
+      @GetMapping(path = "/find")
+     public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Double salary, @RequestParam int department) {
+          return employeeService.findWorker(firstName, lastName,salary,department);
+     }
+    @PostMapping(path = "/add")
+    public void addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Double salary, @RequestParam int department) {
+         employeeService.addWorker(firstName, lastName,salary,department);
+   }
 
 
-    @PostMapping (path = "/add")
-    public void addEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        employeeService.addWorker(firstName, lastName);
-    }
-
-    @DeleteMapping("/delete")
-    public void deleteEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        employeeService.deleteWorker(firstName, lastName);
-    }
-    @GetMapping(path = "/all")
-    public List<Employee> allWorkers() {
-        return employeeService.allWorkers();
-    }
+  @DeleteMapping("/delete")
+  public void deleteEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Double salary, @RequestParam int department) {
+      employeeService.deleteWorker(firstName, lastName,salary,department);
+  }
+   @GetMapping(path = "/all")
+   public List<Employee> allWorkers() {
+    return employeeService.allWorkers();
+   }
 }
