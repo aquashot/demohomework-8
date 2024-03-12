@@ -3,12 +3,10 @@ package com.exampleskypro.demohomework8.service;
 import com.exampleskypro.demohomework8.exception.EmployeeNotFoundException;
 import com.exampleskypro.demohomework8.exception.EmployeeStorageIsFullException;
 import com.exampleskypro.demohomework8.model.Employee;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @Service
 public class EmployeeService {
@@ -23,6 +21,11 @@ public class EmployeeService {
         if (employees.containsKey(addWorker.toString())) {
             throw new EmployeeNotFoundException();
         }
+
+        String correctedfirstName= StringUtils.capitalize(addWorker.getFirstName().toLowerCase());
+        addWorker.setFirstName(correctedfirstName);
+        String correctedlastName= StringUtils.capitalize(addWorker.getLastName().toLowerCase());
+        addWorker.setLastName(correctedlastName);
         employees.put(addWorker.toString(), addWorker);
     }
 

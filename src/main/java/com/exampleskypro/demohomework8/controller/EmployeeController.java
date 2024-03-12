@@ -1,7 +1,9 @@
 package com.exampleskypro.demohomework8.controller;
 
+import com.exampleskypro.demohomework8.exception.EmployeeBadRequest;
 import com.exampleskypro.demohomework8.model.Employee;
 import com.exampleskypro.demohomework8.service.EmployeeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,9 @@ public class EmployeeController {
      }
     @PostMapping(path = "/add")
     public void addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Double salary, @RequestParam int department) {
+        if(!StringUtils.isAlpha(firstName)){
+            throw new EmployeeBadRequest();
+        }
          employeeService.addWorker(firstName, lastName,salary,department);
    }
 
